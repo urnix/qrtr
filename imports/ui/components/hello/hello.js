@@ -1,19 +1,27 @@
 import './hello.html';
 
-Template.hello.onCreated(function helloOnCreated() {
-  // counter starts at 0
-  this.counter = new ReactiveVar(0);
+Template.hello.onCreated(function helloOnCreated () {
+  let self = this;
+  this.result = new ReactiveVar(undefined);
+  let objectId = FlowRouter.getParam('objectId');
+  let message = FlowRouter.getParam('message');
+
+  if (objectId && message) {
+    Meteor.call('send_email', objectId, message, (error) => {
+      if (error){
+        self.result.set('Ошибка. Сообщение не было отправлено.');
+        console.error(error)
+      } else {
+        self.result.set('Ваше обращение передано специалисту.');
+      }
+    });
+  } else {
+    self.result.set('Неверная ссылка.')
+  }
 });
 
 Template.hello.helpers({
-  counter() {
-    return Template.instance().counter.get();
-  },
-});
-
-Template.hello.events({
-  'click button'(event, instance) {
-    // increment the counter when button is clicked
-    instance.counter.set(instance.counter.get() + 1);
-  },
+  result() {
+    return Template.instance().result.get();
+  }
 });

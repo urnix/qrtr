@@ -1,4 +1,8 @@
 <template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
+    {{#if result}}
+        <h1>{{result}}</h1>
+    {{else}}
+        <h1>Обрабатываем ваше обращение...</h1>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif" alt="">
+    {{/if}}
 </template>

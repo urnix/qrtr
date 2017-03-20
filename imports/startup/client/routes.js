@@ -7,7 +7,14 @@ import '../../ui/pages/home/home.js';
 import '../../ui/pages/not-found/not-found.js';
 
 // Set up all routes in the app
-FlowRouter.route('/', {
+// FlowRouter.route('/', {
+//   name: 'App.home',
+//   action() {
+//     FlowRouter.go('/go/')
+//   },
+// });
+
+FlowRouter.route('/go/:objectId?/:message?', {
   name: 'App.home',
   action() {
     BlazeLayout.render('App_body', { main: 'App_home' });
@@ -16,6 +23,7 @@ FlowRouter.route('/', {
 
 FlowRouter.notFound = {
   action() {
-    BlazeLayout.render('App_body', { main: 'App_notFound' });
+    FlowRouter.go('/go/');
+    // BlazeLayout.render('App_body', { main: 'App_notFound' });
   },
 };
