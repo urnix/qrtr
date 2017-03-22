@@ -1,0 +1,11 @@
+template(name="info")
+  h2 Learn Meteor!
+  ul
+    li
+      form.info-link-add
+        input(type="text", name="title", placeholder="Title", required="")
+        input(type="url", name="url", placeholder="Url", required="")
+        input(type="submit", name="submit", value="Add new link")
+    each link in links
+      li
+        a(href="{{link.url}}", target="_blank") {{link.title}}
