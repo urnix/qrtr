@@ -27,3 +27,4 @@ mquandalle:jade
 coffeescript
 stylus
 email
+twbs:bootstrap

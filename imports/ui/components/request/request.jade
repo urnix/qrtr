@@ -1,6 +1,19 @@
 template(name="request")
-  if result
-    h1 {{result}}
-  else
-    h1 Обрабатываем ваше обращение...
-    img(src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif", alt="")
+  #component-request
+    if selectVisible
+      if objectFound
+        form#form-messages.col-xs-8.col-sm-6.col-lg-3
+          select.form-control#select-messages
+            option(value="") Выберите действие
+            each option in options
+              option(value="{{option}}") {{option}}
+        .clearfix
+      else
+        h1 Объект не найден в системе
+
+    if sending
+      h1 Отсылаем на сервер...
+      img(src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif")
+
+    if result
+      h1 {{result}}
